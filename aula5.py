@@ -54,7 +54,48 @@ def le_usuario_por_id(id):
         comando_sql = select(Usuario).filter_by(id=id)
         usuarios = session.execute(comando_sql).fetchall()
         return usuarios[0][0]
+    
+# old
+# def modifica_usuario(
+#         id,
+#         nome=None,
+#         senha=None,
+#         email=None,
+#         acesso_gestor=None
+#         ):
+#     with Session(bind=engine) as session:
+#         comando_sql = select(Usuario).filter_by(id=id)
+#         usuarios = session.execute(comando_sql).fetchall()
+#         for usuario in usuarios:
+#             if nome:
+#                 usuario[0].nome = nome
+#             if senha:
+#                 usuario[0].senha= senha
+#             if email:
+#                 usuario[0].email = email
+#             if not acesso_gestor is None:
+#                 usuario[0].acesso_gestor = acesso_gestor
+#         session.commit()
 
+def modifica_usuario(
+        id,
+        **kwargs
+        ):
+    with Session(bind=engine) as session:
+        comando_sql = select(Usuario).filter_by(id=id)
+        usuarios = session.execute(comando_sql).fetchall()
+        for usuario in usuarios:
+            for key, value in kwargs.items():
+                setattr(usuario[0], key, value)
+        session.commit()
+
+def deleta_usuario(id):
+    with Session(bind=engine) as session:
+        comando_sql = select(Usuario).filter_by(id=id)
+        usuarios = session.execute(comando_sql).fetchall()
+        for usuario in usuarios:
+            session.delete(usuario[0])
+        session.commit()
 
 
 if __name__ == '__main__':
@@ -70,7 +111,12 @@ if __name__ == '__main__':
     # print(usuario_0)
     # print(usuario_0.nome, usuario_0.senha, usuario_0.email)
 
-    usuario_bruna = le_usuario_por_id(id=1)
-    print(usuario_bruna)
-    print(usuario_bruna.nome, usuario_bruna.senha, usuario_bruna.email)
+    # usuario_bruna = le_usuario_por_id(id=1)
+    # print(usuario_bruna)
+    # print(usuario_bruna.nome, usuario_bruna.senha, usuario_bruna.email)
+
+    # modifica_usuario(id=1, nome='Novo Nome da Bruna', senha='Nova senha Bruna')
+
+    deleta_usuario(id=4)
+
 
