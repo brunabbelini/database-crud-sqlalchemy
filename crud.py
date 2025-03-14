@@ -89,9 +89,9 @@ def deleta_usuario(id):
 
 if __name__ == '__main__':
     # cria_usuarios(
-    #     'Luiza Cherobini',
-    #     senha='minha_senha3',
-    #     email='meuemail3.com',
+    #     'Bruna Belini',
+    #     senha='minha_senha',
+    #     email='meuemail.com',
     #     acesso_gestor=True
     # )
 
@@ -107,26 +107,6 @@ if __name__ == '__main__':
     # modifica_usuario(id=1, nome='Novo Nome da Bruna', senha='Nova senha Bruna')
 
     # deleta_usuario(id=4)
-
-    # cria_usuarios(
-    #     'Bruna Belini',
-    #     senha='minha_senha',
-    #     email='meuemail.com',
-    #     acesso_gestor=True
-    # )
-
-    cria_usuarios(
-        'Luisa Belini',
-        senha='lu',
-        email='meuemail1.com',
-        acesso_gestor=False
-    )
-
-    cria_usuarios(
-        'Juliano Faccioni',
-        senha='juli',
-        email='juliano_email.com',
-    )
 
     usuario_bruna = le_usuario_por_id(id=1)
     print(usuario_bruna.verifica_senha('minha_senha'))
