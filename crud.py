@@ -63,28 +63,6 @@ def le_usuario_por_id(id):
         usuarios = session.execute(comando_sql).fetchall()
         return usuarios[0][0]
     
-# old
-# def modifica_usuario(
-#         id,
-#         nome=None,
-#         senha=None,
-#         email=None,
-#         acesso_gestor=None
-#         ):
-#     with Session(bind=engine) as session:
-#         comando_sql = select(Usuario).filter_by(id=id)
-#         usuarios = session.execute(comando_sql).fetchall()
-#         for usuario in usuarios:
-#             if nome:
-#                 usuario[0].nome = nome
-#             if senha:
-#                 usuario[0].senha= senha
-#             if email:
-#                 usuario[0].email = email
-#             if not acesso_gestor is None:
-#                 usuario[0].acesso_gestor = acesso_gestor
-#         session.commit()
-
 def modifica_usuario(
         id,
         **kwargs
@@ -136,6 +114,19 @@ if __name__ == '__main__':
     #     email='meuemail.com',
     #     acesso_gestor=True
     # )
+
+    cria_usuarios(
+        'Luisa Belini',
+        senha='lu',
+        email='meuemail1.com',
+        acesso_gestor=False
+    )
+
+    cria_usuarios(
+        'Juliano Faccioni',
+        senha='juli',
+        email='juliano_email.com',
+    )
 
     usuario_bruna = le_usuario_por_id(id=1)
     print(usuario_bruna.verifica_senha('minha_senha'))
